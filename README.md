@@ -6,8 +6,10 @@
 
 ## Overview
 
-**BeaverOps** is an end-to-end automation suite designed to streamline large-scale Counter-Strike 2 weekly drop operations. It ties together central fleet management, multi-instance game execution, automated weekly drop claiming, and proxy-routed trade consolidation into a single coordinated pipeline.
+> [!NOTE]
+>  **Web Dashboard:** Live panel is available at [**`http://localhost:1337/`**](http://localhost:1337/)
 
+**BeaverOps** is an end-to-end automation suite designed to streamline large-scale Counter-Strike 2 weekly drop operations. It ties together central fleet management, multi-instance game execution, automated weekly drop claiming, and proxy-routed trade consolidation into a single coordinated pipeline.
 
 
 ## System Showcase
@@ -76,5 +78,3 @@ Dedicated trade management console for consolidating harvested cases and skins f
 --- -->
 
 
-
-The web dashboard will be available at `http://localhost:1337/`.
