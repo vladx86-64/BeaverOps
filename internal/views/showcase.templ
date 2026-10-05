@@ -1,0 +1,666 @@
+package views
+
+templ Showcase() {
+	@Layout("CASE OPS") {
+		@NavBar()
+		@AboutTab()
+		@LiveTab()
+		@Footer()
+		@Lightbox()
+		@ShowcaseScripts()
+	}
+}
+
+templ NavBar() {
+	<nav class="nav-bar">
+		<div class="nav-tabs" role="tablist">
+			<button class="nav-btn active" id="tab-btn-about" role="tab" aria-selected="true" aria-controls="pane-about" onclick="switchTab('about')">
+				<span class="tab-indicator">◈</span>
+				<span>SYSTEM SHOWCASE & ABOUT</span>
+				<span class="nav-pill">4 MODULES</span>
+			</button>
+			<button class="nav-btn" id="tab-btn-live" role="tab" aria-selected="false" aria-controls="pane-live" onclick="switchTab('live')">
+				<span class="tab-indicator">●</span>
+				<span>LIVE READOUT</span>
+			</button>
+		</div>
+		<div class="nav-meta">{ "// SYSTEM PIPELINE & MODULE ARCHITECTURE" }</div>
+	</nav>
+}
+
+templ AboutTab() {
+	<div class="tab-pane active" id="pane-about" role="tabpanel" aria-labelledby="tab-btn-about">
+		<!-- ARCHITECTURE HERO -->
+		<div class="about-hero">
+			<div class="about-hero-tag">{ "// End-to-End Farming & Trading Pipeline" }</div>
+			<h2 class="about-hero-title">BEAVEROPS SYSTEM ARCHITECTURE</h2>
+			<p class="about-hero-desc">
+				BeaverOps is an integrated automation framework designed for large-scale
+				Counter-Strike 2 weekly drop operations. In the stable Windows production environment,
+				it runs multiple concurrent CS2 instances across separate Windows local user accounts,
+				bypassing multi-instance restrictions by closing mutant handles in processes.
+				The architecture connects centralized desktop fleet orchestration, automated weekly
+				drop offer scanning and verification, and Steam Authenticator (SDA) proxy-routed trade
+				liquidation (with experimental headless Linux clustering in development).
+			</p>
+			<!-- Pipeline Quick-Jump Track -->
+			<div class="pipeline-track">
+				<a href="#showcase-master-node" class="pipeline-step" onclick="scrollToModule('showcase-master-node')">
+					<div class="pipeline-step-head">
+						<span class="pipeline-step-num">STAGE 01</span>
+						<span class="pipeline-step-arrow">→</span>
+					</div>
+					<div class="pipeline-step-title">Master Node</div>
+					<div class="pipeline-step-sub">Desktop Orchestrator & DB</div>
+				</a>
+				<a href="#showcase-collect-drops" class="pipeline-step" onclick="scrollToModule('showcase-collect-drops')">
+					<div class="pipeline-step-head">
+						<span class="pipeline-step-num">STAGE 02</span>
+						<span class="pipeline-step-arrow">→</span>
+					</div>
+					<div class="pipeline-step-title">Drop Harvester</div>
+					<div class="pipeline-step-sub">Automated Offer Claiming</div>
+				</a>
+				<a href="#showcase-worker-node" class="pipeline-step" onclick="scrollToModule('showcase-worker-node')">
+					<div class="pipeline-step-head">
+						<span class="pipeline-step-num">STAGE 03</span>
+						<span class="pipeline-step-arrow">→</span>
+					</div>
+					<div class="pipeline-step-title">Worker Node</div>
+					<div class="pipeline-step-sub">Windows Stable (Linux Exp.)</div>
+				</a>
+				<a href="#showcase-trade-panel" class="pipeline-step" onclick="scrollToModule('showcase-trade-panel')">
+					<div class="pipeline-step-head">
+						<span class="pipeline-step-num">STAGE 04</span>
+						<span class="pipeline-step-arrow">✓</span>
+					</div>
+					<div class="pipeline-step-title">BeaverTrader</div>
+					<div class="pipeline-step-sub">SDA 2FA & SOCKS5 Liquidation</div>
+				</a>
+			</div>
+		</div>
+		<div class="section-head">
+			<div class="section-title">Production Interface Showcase</div>
+			<div class="section-meta">4 live components captured in production</div>
+		</div>
+		<!-- MODULE 01: MASTER NODE WITH DASHBOARD -->
+		<div class="showcase-card" id="showcase-master-node">
+			<div class="showcase-header">
+				<div class="showcase-header-left">
+					<div class="showcase-index">{ "01 // Central Orchestration" }</div>
+					<h3 class="showcase-title">Master Node & Operations Dashboard</h3>
+				</div>
+				<div class="badge-cluster">
+					<span class="badge highlight">CENTRAL CONTROLLER</span>
+					<span class="badge">DESKTOP-1B80EAG</span>
+					<span class="badge">AUTO-FARM TOGGLE</span>
+					<span class="badge">GLOBAL DB</span>
+				</div>
+			</div>
+			<div class="showcase-body">
+				<div class="showcase-img-box" onclick="openLightbox(0)">
+					<img src="/assets/01-master-node-dashboard.png" alt="BeaverOps Master Node Dashboard" loading="lazy"/>
+					<div class="showcase-overlay">
+						<span>⚲ CLICK TO EXPAND FULL RESOLUTION</span>
+					</div>
+				</div>
+				<div class="showcase-info">
+					<p class="showcase-desc">
+						The central management console of the BeaverOps desktop application. It acts as the operational brain, coordinating worker nodes over internal subnets (e.g. <code>DESKTOP-1B80EAG</code> at <code>172.18.0.1</code>), assigning Steam accounts across multi-slot queues, and controlling automated farming schedules. The global database maintains real-time tracking of account levels, playtime hours, live weekly drop progress bars, and Steam session token validity.
+					</p>
+					<div class="showcase-specs">
+						<div class="spec-item">
+							<span class="spec-label">Worker Node Management</span>
+							<span class="spec-val">Real-time IP discovery, slot availability monitoring (FREE / OP), and agent health check.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Global Account Database</span>
+							<span class="spec-val">Fleet-wide tracking with live XP/drop progress bars, login tokens, and weekly reset countdown.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Active Slot Orchestration</span>
+							<span class="spec-val">Granular slot assignments with auto-farm scheduling and idle task controls.</span>
+						</div>
+					</div>
+					<button class="showcase-zoom-btn" onclick="openLightbox(0)">
+						<span>EXPAND SCREENSHOT</span>
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODULE 02: COLLECT DROPS PAGE -->
+		<div class="showcase-card" id="showcase-collect-drops">
+			<div class="showcase-header">
+				<div class="showcase-header-left">
+					<div class="showcase-index">{ "02 // Drop Harvesting Module" }</div>
+					<h3 class="showcase-title">Collect Drops Verification & Claim Console</h3>
+				</div>
+				<div class="badge-cluster">
+					<span class="badge highlight">HARVEST ENGINE</span>
+					<span class="badge">SMART 2-ITEM LOGIC</span>
+					<span class="badge">IRREVERSIBLE CLAIM</span>
+					<span class="badge">SO CACHE AUDIT</span>
+				</div>
+			</div>
+			<div class="showcase-body">
+				<div class="showcase-img-box" onclick="openLightbox(1)">
+					<img src="/assets/02-collect-drops.png" alt="BeaverOps Collect Drops Module" loading="lazy"/>
+					<div class="showcase-overlay">
+						<span>⚲ CLICK TO EXPAND FULL RESOLUTION</span>
+					</div>
+				</div>
+				<div class="showcase-info">
+					<p class="showcase-desc">
+						Located directly inside the same master node application under the <code>_Drops</code> menu. Once accounts complete their weekly farming cycles, this module inspects pending drop packages across the entire account roster. An automated heuristic selects the two highest-yield rewards per account (prioritizing weapon cases such as Kilowatt or Revolution and weapon finishes over graffiti) before executing irreversible batch claims with real-time audit logging.
+					</p>
+					<div class="showcase-specs">
+						<div class="spec-item">
+							<span class="spec-label">Automated Batch Scanner</span>
+							<span class="spec-val">One-click fleet scan (SCAN, VERIFY ALL) discovering weekly drop reward packages without launching the game.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Smart Selection Algorithm</span>
+							<span class="spec-val">2/2 reward selection automatically locking in premium weapon cases and skins while omitting graffiti.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Execution Safety Console</span>
+							<span class="spec-val">Irreversible claim confirmation barrier paired with real-time SO cache generation transaction logs.</span>
+						</div>
+					</div>
+					<button class="showcase-zoom-btn" onclick="openLightbox(1)">
+						<span>EXPAND SCREENSHOT</span>
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODULE 03: WORKER NODE ENGINE -->
+		<div class="showcase-card" id="showcase-worker-node">
+			<div class="showcase-header">
+				<div class="showcase-header-left">
+					<div class="showcase-index">{ "03 // Worker Node Engine" }</div>
+					<h3 class="showcase-title" id="worker-title">Windows Farm Worker Node (Stable)</h3>
+				</div>
+				<div class="badge-cluster" id="worker-badges">
+					<div class="worker-mode-toggle">
+						<button class="mode-btn active" id="btn-worker-win" onclick="setWorkerMode('win')">
+							<span class="mode-dot">●</span> STABLE: WINDOWS
+						</button>
+						<button class="mode-btn" id="btn-worker-linux" onclick="setWorkerMode('linux')">
+							<span class="mode-dot">◌</span> EXPERIMENTAL: LINUX
+						</button>
+					</div>
+					<span class="badge highlight" id="worker-status-badge">STABLE PRODUCTION</span>
+					<span class="badge" id="worker-tag-1">INTERNAL IPC cs2_farm</span>
+					<span class="badge" id="worker-tag-2">SMART GRID HARD PIN</span>
+					<span class="badge" id="worker-tag-3">MUTEX ISOLATION</span>
+				</div>
+			</div>
+			<!-- SUB-VIEW A: WINDOWS STABLE (DEFAULT) -->
+			<div class="showcase-body worker-view" id="worker-view-win">
+				<div class="showcase-img-box" onclick="openLightbox(2)">
+					<img src="/assets/03-windows-worker-node.png" alt="Windows Farm Worker Node with bot overlay & IPC terminal" loading="lazy"/>
+					<div class="showcase-overlay">
+						<span>⚲ CLICK TO EXPAND FULL RESOLUTION</span>
+					</div>
+				</div>
+				<div class="showcase-info">
+					<p class="showcase-desc">
+						The core production workhorse for BeaverOps. Runs natively on Windows worker nodes (e.g. <code>DESKTOP-1B80EAG</code>), executing automated Steam account swaps, launching optimized borderless CS2 instances (<code>-noborder -width 640 -height 480 +engine_no_focus_sleep 0</code>), isolating game processes via custom mutex management (<code>kill_mutants.exe</code>), and anchoring windows via Smart Grid Hard Pin. Communicates via a dedicated named pipe (<code>cs2_farm</code>) with internal DLL hooks driving real-time navigation raycasting, FOV cones, and matchmaking lifecycle telemetry.
+					</p>
+					<div class="showcase-specs">
+						<div class="spec-item">
+							<span class="spec-label">Process & Mutex Isolation</span>
+							<span class="spec-val">Source 2 mutex closing & custom mutant killer allowing multi-account concurrent operations on Windows without collision.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Internal Named Pipe IPC</span>
+							<span class="spec-val">Real-time bi-directional IPC pipe stream dispatching structured events: HANDSHAKE, HOOKS_INITIALIZED, MATCH_JOINED, MINUTE_FARMED.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Smart Grid Window Positioning</span>
+							<span class="spec-val">Automated desktop tile locking (e.g. PID 22692 pinned to Slot 0 at X:0, Y:0) paired with in-game pathing & raycast overlays.</span>
+						</div>
+					</div>
+					<button class="showcase-zoom-btn" onclick="openLightbox(2)">
+						<span>EXPAND SCREENSHOT</span>
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+			<!-- SUB-VIEW B: LINUX EXPERIMENTAL -->
+			<div class="showcase-body worker-view" id="worker-view-linux" style="display: none;">
+				<div class="showcase-img-box" onclick="openLightbox(3)">
+					<img src="/assets/03-cs2-instances-htop.png" alt="Headless CS2 instances with htop telemetry on Linux" loading="lazy"/>
+					<div class="showcase-overlay">
+						<span>⚲ CLICK TO EXPAND FULL RESOLUTION</span>
+					</div>
+				</div>
+				<div class="showcase-info">
+					<p class="showcase-desc">
+						<strong>Experimental Branch:</strong> Containerized Linux architecture running 3 concurrent Counter-Strike 2 instances inside isolated Docker containers (<code>docker-steam-headless</code>) on a dedicated host (<code>192.168.1.178</code>). Real-time visual feedback is streamed through low-overhead noVNC browser sessions (ports <code>8083</code>, <code>8084</code>, <code>8085</code>), while host threads and system resources are monitored via <code>htop</code>. Currently in development as an alternative deployment target.
+					</p>
+					<div class="showcase-specs">
+						<div class="spec-item">
+							<span class="spec-label">Branch Status</span>
+							<span class="spec-val"><strong style="color: var(--signal-amber);">Experimental R&D:</strong> Under active testing for headless server environments while Windows remains the stable production standard.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Virtual Xorg & Docker Isolation</span>
+							<span class="spec-val">Independent virtual displays per container running headless Steam/CS2 sessions without graphical desktop manager dependencies.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">noVNC Telemetry & htop Profiling</span>
+							<span class="spec-val">Zero-install web viewports for real-time visual inspection with multi-core Linux kernel thread load monitoring.</span>
+						</div>
+					</div>
+					<button class="showcase-zoom-btn" onclick="openLightbox(3)">
+						<span>EXPAND SCREENSHOT</span>
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODULE 04: BEAVERTRADER TRADE PANEL -->
+		<div class="showcase-card" id="showcase-trade-panel">
+			<div class="showcase-header">
+				<div class="showcase-header-left">
+					<div class="showcase-index">{ "04 // Liquidation & Trading" }</div>
+					<h3 class="showcase-title">BeaverTrader Automated Liquidation & Trade Panel</h3>
+				</div>
+				<div class="badge-cluster">
+					<span class="badge highlight">BEAVERTRADER</span>
+					<span class="badge">SDA 2FA INTEGRATION</span>
+					<span class="badge">SOCKS5 ROTATION</span>
+					<span class="badge">AUTO-CONFIRM OFFERS</span>
+				</div>
+			</div>
+			<div class="showcase-body">
+				<div class="showcase-img-box" onclick="openLightbox(4)">
+					<img src="/assets/04-trade-panel.png" alt="BeaverTrader automated trade panel" loading="lazy"/>
+					<div class="showcase-overlay">
+						<span>⚲ CLICK TO EXPAND FULL RESOLUTION</span>
+					</div>
+				</div>
+				<div class="showcase-info">
+					<p class="showcase-desc">
+						A dedicated trading console created to consolidate and liquidate harvested cases, skins, and stickers from the farming pool into central accounts. BeaverTrader features direct Steam Desktop Authenticator (SDA) identity secret automation, a resilient SOCKS5 proxy rotation system with live cooldown badges, inventory valuation calculation, and one-click bulk trade dispatch with automated trade confirmation.
+					</p>
+					<div class="showcase-specs">
+						<div class="spec-item">
+							<span class="spec-label">SDA & 2FA Automation</span>
+							<span class="spec-val">Automated mobile confirmation dispatch using Base64 shared secrets and Steam refresh tokens.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">Proxy Pool Management</span>
+							<span class="spec-val">Rotating SOCKS5 proxy pool with live cooldown tracking to ensure Steam API rate-limit resilience.</span>
+						</div>
+						<div class="spec-item">
+							<span class="spec-label">One-Click Consolidation</span>
+							<span class="spec-val">"SELECT ALL & TRADE EVERYTHING" workflow with automated trade URL targeting and live asset valuations.</span>
+						</div>
+					</div>
+					<button class="showcase-zoom-btn" onclick="openLightbox(4)">
+						<span>EXPAND SCREENSHOT</span>
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+templ LiveTab() {
+	<div class="tab-pane" id="pane-live" role="tabpanel" aria-labelledby="tab-btn-live">
+		<div class="hero-label">{ "// fleet status" }</div>
+		<div class="stat-row">
+			<div class="stat-panel">
+				<div class="k">Total Accounts</div>
+				<div class="v" id="stat-total">—</div>
+			</div>
+			<div class="stat-panel">
+				<div class="k">In Operation</div>
+				<div class="v" id="stat-active">—</div>
+				<div class="stat-bar-track"><div class="stat-bar-fill" id="bar-active" style="width:0%"></div></div>
+			</div>
+			<div class="stat-panel">
+				<div class="k">Completed</div>
+				<div class="v" id="stat-done">—</div>
+				<div class="stat-bar-track"><div class="stat-bar-fill" id="bar-done" style="width:0%"></div></div>
+			</div>
+		</div>
+		<div class="section-head">
+			<div class="section-title">Case Vault</div>
+			<div class="section-meta" id="vault-meta">— total opened</div>
+		</div>
+		<div class="vault-grid" id="vault-grid"></div>
+		<div class="section-head">
+			<div class="section-title">Drop Rarity Breakdown</div>
+			<div class="section-meta" id="rarity-meta">— items tracked</div>
+		</div>
+		<div class="ladder" id="ladder"></div>
+	</div>
+}
+
+templ Footer() {
+	<footer>
+		<div>AUTO-SYNC EVERY 5 MIN</div>
+		<div class="footer-links">
+			<button class="footer-btn" onclick="switchTab('about')">{ "// SYSTEM ARCHITECTURE & ABOUT" }</button>
+			<span class="footer-sep">{ "//" }</span>
+			<button class="footer-btn" onclick="switchTab('live')">{ "// LIVE READOUT" }</button>
+		</div>
+		<div id="uptime-tick">UPTIME 00:00:00</div>
+	</footer>
+}
+
+templ Lightbox() {
+	<div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" onclick="onLightboxBackdropClick(event)">
+		<div class="lightbox-frame" onclick="event.stopPropagation()">
+			<div class="lightbox-header">
+				<div class="lightbox-title-wrap">
+					<div class="lightbox-title" id="lightbox-title">—</div>
+					<div class="lightbox-counter" id="lightbox-counter">[ 1 / 5 ]</div>
+				</div>
+				<button class="lightbox-close" onclick="closeLightbox()" aria-label="Close Lightbox">ESC / CLOSE ×</button>
+			</div>
+			<div class="lightbox-body">
+				<img id="lightbox-img" src="" alt="Expanded Screenshot"/>
+			</div>
+			<div class="lightbox-footer">
+				<div class="lightbox-caption" id="lightbox-caption">—</div>
+				<div class="lightbox-nav">
+					<button class="lightbox-nav-btn" onclick="prevLightbox()">← PREV</button>
+					<button class="lightbox-nav-btn" onclick="nextLightbox()">NEXT →</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+templ ShowcaseScripts() {
+	<script>
+/* ============================================================
+   DATA LAYER
+   Real VPS ingest endpoint can be wired here:
+     const res = await fetch('https://your-vps.example/api/stats');
+     return await res.json();
+   Returns null for now so live readout displays N/A.
+   ============================================================ */
+async function fetchStats(){
+  return null;
+}
+
+function crateIcon(accent){
+  return `
+  <svg width="46" height="40" viewBox="0 0 46 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="10" width="42" height="26" rx="1.5" fill="#1c2126" stroke="${accent}" stroke-width="1.5"/>
+    <path d="M2 18H44" stroke="${accent}" stroke-width="1.2" opacity="0.55"/>
+    <path d="M17 10L23 2L29 10" stroke="${accent}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="23" cy="24" r="4.5" fill="none" stroke="${accent}" stroke-width="1.5"/>
+    <rect x="21.2" y="23" width="3.6" height="4" rx="0.6" fill="${accent}"/>
+  </svg>`;
+}
+
+function fmt(n){ return n != null ? n.toLocaleString('en-US') : 'N/A'; }
+
+function render(data){
+  if (!data) {
+    document.getElementById('stat-total').textContent = 'N/A';
+    document.getElementById('stat-active').textContent = 'N/A';
+    document.getElementById('stat-done').textContent = 'N/A';
+    document.getElementById('bar-active').style.width = '0%';
+    document.getElementById('bar-done').style.width = '0%';
+    document.getElementById('vault-meta').textContent = 'N/A — awaiting ingest';
+    document.getElementById('rarity-meta').textContent = 'N/A — awaiting ingest';
+    return;
+  }
+
+  // When live data is returned:
+  document.getElementById('stat-total').textContent = data.accounts?.total != null ? fmt(data.accounts.total) : 'N/A';
+  document.getElementById('stat-active').textContent = data.accounts?.active != null ? fmt(data.accounts.active) : 'N/A';
+  document.getElementById('stat-done').textContent = data.accounts?.completed != null ? fmt(data.accounts.completed) : 'N/A';
+  
+  if (data.accounts?.total) {
+    document.getElementById('bar-active').style.width = ((data.accounts.active || 0) / data.accounts.total * 100).toFixed(0) + '%';
+    document.getElementById('bar-done').style.width = ((data.accounts.completed || 0) / data.accounts.total * 100).toFixed(0) + '%';
+  } else {
+    document.getElementById('bar-active').style.width = '0%';
+    document.getElementById('bar-done').style.width = '0%';
+  }
+
+  // Case Vault
+  const vaultEl = document.getElementById('vault-grid');
+  if (data.cases && data.cases.length > 0) {
+    const totalCases = data.cases.reduce((a,c)=>a+c.count,0);
+    document.getElementById('vault-meta').textContent = fmt(totalCases) + ' total opened';
+    vaultEl.innerHTML = data.cases
+      .sort((a,b)=>b.count-a.count)
+      .map(c => `
+        <div class="crate-card">
+          <div class="crate-icon-box">${crateIcon(c.accent)}</div>
+          <div class="crate-name">${c.name}</div>
+          <div class="crate-count-row">
+            <span class="crate-count">${fmt(c.count)}</span>
+            <span class="crate-count-label">opened</span>
+          </div>
+        </div>
+      `).join('');
+  } else {
+    document.getElementById('vault-meta').textContent = 'N/A — awaiting ingest';
+  }
+
+  // Rarity Breakdown
+  const ladderEl = document.getElementById('ladder');
+  if (data.rarity && data.rarity.length > 0) {
+    const totalItems = data.rarity.reduce((a,r)=>a+r.count,0);
+    document.getElementById('rarity-meta').textContent = fmt(totalItems) + ' items tracked';
+    const maxCount = Math.max(...data.rarity.map(r=>r.count)) || 1;
+    ladderEl.innerHTML = data.rarity.map(r => `
+      <div class="rung">
+        <div class="rung-label"><span class="rung-swatch" style="background:${r.color}"></span>${r.tier}</div>
+        <div class="rung-track"><div class="rung-fill" style="width:${(r.count/maxCount*100).toFixed(1)}%; background:${r.color}"></div></div>
+        <div class="rung-count"><b>${fmt(r.count)}</b></div>
+      </div>
+    `).join('');
+  } else {
+    document.getElementById('rarity-meta').textContent = 'N/A — awaiting ingest';
+  }
+}
+
+function tickClock(){
+  const now = new Date();
+  document.getElementById('sync-time').textContent = 'SYNCED ' + now.toTimeString().slice(0,8);
+}
+
+let startTime = Date.now();
+function tickUptime(){
+  const diff = Date.now() - startTime;
+  const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+  const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  document.getElementById('uptime-tick').textContent = `UPTIME ${h}:${m}:${s}`;
+}
+
+/* ============================================================
+   TAB SWITCHING LOGIC
+   ============================================================ */
+function switchTab(tabId){
+  const btnLive = document.getElementById('tab-btn-live');
+  const btnAbout = document.getElementById('tab-btn-about');
+  const paneLive = document.getElementById('pane-live');
+  const paneAbout = document.getElementById('pane-about');
+
+  if(tabId === 'about'){
+    btnLive.classList.remove('active');
+    btnLive.setAttribute('aria-selected', 'false');
+    btnAbout.classList.add('active');
+    btnAbout.setAttribute('aria-selected', 'true');
+    paneLive.classList.remove('active');
+    paneAbout.classList.add('active');
+    if(!window.location.hash.startsWith('#showcase')){
+      history.replaceState(null, '', '#about');
+    }
+  } else {
+    btnAbout.classList.remove('active');
+    btnAbout.setAttribute('aria-selected', 'false');
+    btnLive.classList.add('active');
+    btnLive.setAttribute('aria-selected', 'true');
+    paneAbout.classList.remove('active');
+    paneLive.classList.add('active');
+    history.replaceState(null, '', '#live');
+  }
+}
+
+function scrollToModule(targetId){
+  switchTab('about');
+  setTimeout(() => {
+    const el = document.getElementById(targetId);
+    if(el){
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + targetId);
+    }
+  }, 60);
+}
+
+/* ============================================================
+   LIGHTBOX MODAL & GALLERY
+   ============================================================ */
+const SHOWCASE_ITEMS = [
+  {
+    title: "01 // MASTER NODE & OPERATIONS DASHBOARD",
+    src: "/assets/01-master-node-dashboard.png",
+    caption: "BeaverOps Master Node desktop app: worker node orchestration, active slots, auto-farm toggle, and global database readout."
+  },
+  {
+    title: "02 // COLLECT DROPS HARVEST MODULE",
+    src: "/assets/02-collect-drops.png",
+    caption: "BeaverOps internal drop harvester: multi-account inventory scanning, smart case/skin selection, and irreversible claim confirmation."
+  },
+  {
+    title: "03 // WINDOWS FARM WORKER NODE (STABLE PRODUCTION)",
+    src: "/assets/03-windows-worker-node.png",
+    caption: "Windows production worker node: custom mutex isolation (kill_mutants.exe), named pipe IPC (cs2_farm), Smart Grid window pinning, and bot pathing overlay."
+  },
+  {
+    title: "03-B // HEADLESS LINUX CLUSTER (EXPERIMENTAL BRANCH)",
+    src: "/assets/03-cs2-instances-htop.png",
+    caption: "Experimental Linux setup: 3 concurrent CS2 game sessions in Docker containers via docker-steam-headless, streamed via noVNC with htop monitoring."
+  },
+  {
+    title: "04 // BEAVERTRADER LIQUIDATION & TRADING PANEL",
+    src: "/assets/04-trade-panel.png",
+    caption: "Automated trading console: Steam Desktop Authenticator (SDA) 2FA integration, SOCKS5 proxy rotation, and instant offer auto-confirm."
+  }
+];
+
+let currentLightboxIdx = 0;
+
+function openLightbox(index){
+  currentLightboxIdx = index;
+  updateLightbox();
+  const modal = document.getElementById('lightbox-modal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  const modal = document.getElementById('lightbox-modal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function onLightboxBackdropClick(event){
+  if(event.target.id === 'lightbox-modal'){
+    closeLightbox();
+  }
+}
+
+function nextLightbox(){
+  currentLightboxIdx = (currentLightboxIdx + 1) % SHOWCASE_ITEMS.length;
+  updateLightbox();
+}
+
+function prevLightbox(){
+  currentLightboxIdx = (currentLightboxIdx - 1 + SHOWCASE_ITEMS.length) % SHOWCASE_ITEMS.length;
+  updateLightbox();
+}
+
+function updateLightbox(){
+  const item = SHOWCASE_ITEMS[currentLightboxIdx];
+  document.getElementById('lightbox-title').textContent = item.title;
+  document.getElementById('lightbox-counter').textContent = `[ ${currentLightboxIdx + 1} / ${SHOWCASE_ITEMS.length} ]`;
+  document.getElementById('lightbox-caption').textContent = item.caption;
+  const img = document.getElementById('lightbox-img');
+  img.src = item.src;
+  img.alt = item.title;
+}
+
+function setWorkerMode(mode){
+  const btnWin = document.getElementById('btn-worker-win');
+  const btnLinux = document.getElementById('btn-worker-linux');
+  const viewWin = document.getElementById('worker-view-win');
+  const viewLinux = document.getElementById('worker-view-linux');
+  const title = document.getElementById('worker-title');
+  const badge = document.getElementById('worker-status-badge');
+  const tag1 = document.getElementById('worker-tag-1');
+  const tag2 = document.getElementById('worker-tag-2');
+  const tag3 = document.getElementById('worker-tag-3');
+
+  if(mode === 'linux'){
+    btnWin.classList.remove('active');
+    btnLinux.classList.add('active');
+    viewWin.style.display = 'none';
+    viewLinux.style.display = 'grid';
+    title.textContent = 'Headless Multi-Instance CS2 Cluster (Experimental)';
+    badge.textContent = 'EXPERIMENTAL';
+    badge.classList.remove('highlight');
+    tag1.textContent = 'DOCKER CONTAINERS';
+    tag2.textContent = 'NOVNC STREAMING';
+    tag3.textContent = 'HTOP MONITORING';
+  } else {
+    btnLinux.classList.remove('active');
+    btnWin.classList.add('active');
+    viewLinux.style.display = 'none';
+    viewWin.style.display = 'grid';
+    title.textContent = 'Windows Farm Worker Node (Stable)';
+    badge.textContent = 'STABLE PRODUCTION';
+    badge.classList.add('highlight');
+    tag1.textContent = 'INTERNAL IPC cs2_farm';
+    tag2.textContent = 'SMART GRID HARD PIN';
+    tag3.textContent = 'MUTEX ISOLATION';
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('lightbox-modal');
+  if(!modal.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowRight') nextLightbox();
+  if(e.key === 'ArrowLeft') prevLightbox();
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if(hash === '#live'){
+    switchTab('live');
+  } else if(hash === '#about'){
+    switchTab('about');
+  } else if(hash.startsWith('#showcase')){
+    const targetId = hash.slice(1);
+    scrollToModule(targetId);
+  }
+});
+
+(async function init(){
+  const data = await fetchStats();
+  render(data);
+  tickClock();
+  tickUptime();
+  setInterval(tickClock, 1000);
+  setInterval(tickUptime, 1000);
+  setInterval(async () => render(await fetchStats()), 5 * 60 * 1000);
+})();
+	</script>
+}
